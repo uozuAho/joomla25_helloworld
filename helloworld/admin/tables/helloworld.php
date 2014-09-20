@@ -10,13 +10,13 @@ jimport('joomla.database.table');
  */
 class HelloWorldTableHelloWorld extends JTable
 {
-        /**
-         * Constructor
-         *
-         * @param object Database connector object
-         */
-        function __construct(&$db)
-        {
-                parent::__construct('#__helloworld', 'id', $db);
-        }
+    /**
+     * Constructor
+     *
+     * @param object Database connector object
+     */
+    function __construct(&$db)
+    {
+        parent::__construct('#__helloworld', 'id', $db);
+    }
 }
