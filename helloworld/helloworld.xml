@@ -10,11 +10,24 @@
         <copyright>Copyright Info</copyright>
         <license>License Info</license>
         <!--  The version string is recorded in the components table -->
-        <version>0.0.7</version>
+        <version>0.0.8</version>
         <!-- The description is optional and defaults to the name -->
         <description>Description of the Hello World component ...</description>
 
-        <update> <!-- Runs on update; New in 2.5 -->
+        <!-- Runs on install -->
+        <install>
+                <sql>
+                        <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+                </sql>
+        </install>
+        <!-- Runs on uninstall -->
+        <uninstall>
+                <sql>
+                        <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+                </sql>
+        </uninstall>
+        <!-- Runs on update; New in 2.5 -->
+        <update>
                 <schemas>
                         <schemapath type="mysql">sql/updates/mysql</schemapath>
                 </schemas>
@@ -40,11 +53,11 @@
                         to copy FROM in the package to install therefore files copied
                         in this section are copied from /admin/ in the package -->
                 <files folder="admin">
-                        <!-- Admin Main File Copy Section -->
                         <filename>index.html</filename>
                         <filename>helloworld.php</filename>
-                        <!-- SQL files section -->
                         <folder>sql</folder>
+                        <folder>tables</folder>
+                        <folder>models</folder>
                 </files>
         </administration>
 

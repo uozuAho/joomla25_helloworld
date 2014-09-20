@@ -9,35 +9,51 @@ jimport('joomla.application.component.modelitem');
 class HelloWorldModelHelloWorld extends JModelItem
 {
     /**
-    * @var string msg
-    */
-    protected $msg;
+     * @var array messages
+     */
+    protected $messages;
 
     /**
-    * Get the message
-    * @return string The message to be displayed to the user
-    */
-    public function getMsg()
+     * Returns a reference to the a Table object, always creating it.
+     *
+     * @param       type    The table type to instantiate
+     * @param       string  A prefix for the table class name. Optional.
+     * @param       array   Configuration array for model. Optional.
+     * @return      JTable  A database object
+     * @since       2.5
+     */
+    public function getTable($type = 'HelloWorld', $prefix = 'HelloWorldTable', $config = array())
     {
-        if (!isset($this->msg))
-        {
-            //Uses JInput if magic quotes is turned off. Falls back to use JRequest.
-            if(!get_magic_quotes_gpc()) {
-                $id = JFactory::getApplication()->input->get('id', 1, 'INT' );
-            } else {
-                $id = JRequest::getInt('id');
-            }
-            switch ($id)
+            return JTable::getInstance($type, $prefix, $config);
+    }
+    /**
+     * Get the message
+     * @param  int    The corresponding id of the message to be retrieved
+     * @return string The message to be displayed to the user
+     */
+    public function getMsg($id = 1)
+    {
+            if (!is_array($this->messages))
             {
-                case 2:
-                $this->msg = 'Good bye World!';
-                break;
-                default:
-                case 1:
-                $this->msg = 'Hello World!';
-                break;
+                    $this->messages = array();
             }
-        }
-        return $this->msg;
+
+            if (!isset($this->messages[$id]))
+            {
+                    //request the selected id
+                    $jinput = JFactory::getApplication()->input;
+                    $id = $jinput->get('id', 1, 'INT' );
+
+                    // Get a TableHelloWorld instance
+                    $table = $this->getTable();
+
+                    // Load the message
+                    $table->load($id);
+
+                    // Assign the message
+                    $this->messages[$id] = $table->greeting;
+            }
+
+            return $this->messages[$id];
     }
 }
