@@ -34,13 +34,27 @@ class HelloWorldViewHelloWorlds extends JView
     /**
      * Setting the toolbar
      */
-    protected function addToolBar()
+    protected function addToolBar($total=null)
     {
         // NOTE: You can find other classic backend actions in the
         // administrator/includes/toolbar.php file of your Joomla installation
-        JToolBarHelper::title(JText::_('COM_HELLOWORLD_MANAGER_HELLOWORLDS'));
+        JToolBarHelper::title(JText::_('COM_HELLOWORLD_MANAGER_HELLOWORLDS').
+            //Reflect number of items in title
+            ($total?' <span style="font-size: 0.5em; vertical-align: middle;">('.$total.')</span>':'')
+            , 'helloworld');
         JToolBarHelper::deleteList('', 'helloworlds.delete');
         JToolBarHelper::editList('helloworld.edit');
         JToolBarHelper::addNew('helloworld.add');
+    }
+
+    /**
+     * Method to set up the document properties
+     *
+     * @return void
+     */
+    protected function setDocument()
+    {
+        $document = JFactory::getDocument();
+        $document->setTitle(JText::_('COM_HELLOWORLD_ADMINISTRATION'));
     }
 }

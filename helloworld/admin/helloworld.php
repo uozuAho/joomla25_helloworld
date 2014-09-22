@@ -2,6 +2,10 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+$document = JFactory::getDocument();
+$document->addStyleDeclaration(
+    '.icon-48-helloworld {background-image: url(../media/com_helloworld/images/tux-16x16.png);}');
+
 // import joomla controller library
 jimport('joomla.application.component.controller');
 
