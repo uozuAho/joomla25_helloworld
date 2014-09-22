@@ -55,6 +55,7 @@
         <files folder="admin">
             <filename>index.html</filename>
             <filename>helloworld.php</filename>
+            <filename>controller.php</filename>
             <folder>sql</folder>
             <folder>tables</folder>
             <folder>models</folder>
